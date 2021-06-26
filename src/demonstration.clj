@@ -3,9 +3,9 @@
             [malli.core :as m]
             [malli.error :as me]
             [presentation-malli :as malli]
-            [test-code :as tc]))
-
-(swagger/transform malli/swagger-query)
+            [test-code :as tc]
+            [malli.generator :as mg]
+            [malli.provider :as mp]))
 
 ;; validate using Malli
 
@@ -60,3 +60,39 @@
 (-> adults-regex
     (m/explain {:adults 2})
     (me/humanize))
+
+;; generating swagger for swagger docs
+
+(swagger/transform malli/query)
+
+;; generating values from schemas
+
+;; using a seed
+(mg/generate [:enum "qff_member" "flight_booker" "qff_member,flight_booker"] {:seed 101})
+
+;; using seed and size
+(mg/generate pos-int? {:seed 2 :size 100})
+
+;; using regex
+(mg/generate [:re #"^apartments|backpackers_hostels|bed_breakfasts$"] {:seed 6 :size 101})
+
+;; using a random schema
+(mg/generate malli/query {:seed 10 :size 5})
+;; using a targeted schema
+(mg/generate malli/query-for-generation {:seed 10 :size 5})
+
+;; infer a schema from samples
+(def samples
+  [{:id          "2345"
+    :name        "It's a hotel"
+    :description "I'm optional"
+    :longitude   135
+    :latitude    78
+    :brand       "qantas"}
+   {:id        "3456"
+    :name      "It's a second hotel"
+    :longitude 145
+    :latitude  83
+    :brand     "jetstar"}])
+
+(mp/provide samples)
