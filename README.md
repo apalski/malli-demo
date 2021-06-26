@@ -1,6 +1,6 @@
 ##Workshop Notes
 
-- ~~Compare Malli to Spec~~
+- Compare Malli to Spec
 - Look at the available clojure.core functions that work with Malli:  
   - with schemas select-keys, dissoc, get, assoc, update,
  get-in, assoc-in, update-in, merge, union
@@ -13,12 +13,6 @@
 - Generate values with schemas
 - Parsing & unparsing
 - Convert schemas to maps, edn, swagger2, json
-- Registries
-- Function schemas
-- Function schema registries
-- Use with clj-kondo (linter)
-- Performance testing
-
 
 ##References
 - https://github.com/metosin/malli#value-generation
