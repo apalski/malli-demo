@@ -1,0 +1,6 @@
+.lsp
+.calva
+.nrepl-port
+pom.properties
+repl-port
+leiningen*
